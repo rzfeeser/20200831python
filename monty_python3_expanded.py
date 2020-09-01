@@ -2,7 +2,12 @@
 round = 0
 answer = " "
 
-
+# a python dictionary of possible answers
+correctanswers = {
+        "brian": "correct",
+        "shrubbery": "We are no longer the knights who say Ni! We are now the knights who say ekki-ekki-ekki-pitang-zoom-boing!",
+        "tim": "Oh great wizard! What do they call you?\nWizard: Some call me... Tim..."
+        }
 
 
 while round < 3:
@@ -13,18 +18,9 @@ while round < 3:
     # transform answer into something "common" to test
     answer = answer.lower()
 
-    # Correct Answer
-    if answer == "brian":
-        print("Correct!")
-        break # you gave an answer... escape the while loop!
-    # Easter Egg
-    elif answer == "shrubbery":
-        print("We are no longer the knights who say Ni! We are now the knights\
-who say ekki-ekki-ekki-pitang-zoom-boing!")
-        break # you gave an answer... escape the while loop!
-    # Easter Egg 2
-    elif answer == "tim":
-        print("Oh great wizard! What do they call you?\nWizard: Some call me... Tim...")
+    # if what the user typed in is "brian", "shrubbery", or "tim"
+    if answer in correctanswers:
+        print(correctanswers.get(answer))
         break
     # if counter reaches 3
     elif round == 3:    # logic to ensure round has not yet reached 3
