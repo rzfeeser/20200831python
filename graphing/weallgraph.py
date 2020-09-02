@@ -38,9 +38,9 @@ width = 0.35       # the width of the bars: can also be len(x) sequence
 
 fig, ax = plt.subplots()
 
-ax.bar(labels, teslasales, width, label='Men')
-ax.bar(labels, chevysales, width, label='Chevy')
-ax.bar(labels, fordsales, width, label='Ford')
+ax.bar(labels, teslasales, width, label='Tesla')
+ax.bar(labels, chevysales, width, label='Chevy', bottom=teslasales)
+ax.bar(labels, fordsales, width, label='Ford', bottom=chevysales)
 
 ax.set_ylabel('Number of Sales')
 ax.set_title('Sales of Vehicles within the United States per Month in 2020')
