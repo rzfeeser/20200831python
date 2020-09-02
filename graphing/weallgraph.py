@@ -46,4 +46,4 @@ ax.set_ylabel('Number of Sales')
 ax.set_title('Sales of Vehicles within the United States per Month in 2020')
 ax.legend()
 
-plt.savefig("/home/student/mycode/graphing/secondgraph.png")
+plt.savefig("/home/student/mycode/graphing/carReport.png")
