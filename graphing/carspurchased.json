@@ -1,0 +1,8 @@
+{
+	"january": {"tesla": 104, "ford": 200, "chevy": 220 },
+	"febuary": {"tesla": 130, "ford": 200, "chevy": 220 },
+	"march": {"tesla": 124, "ford": 300, "chevy": 179 },
+	"april": {"tesla": 110, "ford": 260, "chevy": 202 },
+	"may": {"tesla": 77, "ford": 204, "chevy": 220 },
+	"june": { "tesla": 98, "ford": 149, "chevy": 170 }
+}
