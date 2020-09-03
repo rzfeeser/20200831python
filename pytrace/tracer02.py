@@ -37,15 +37,8 @@ def profilegenerator(shortperps, jobnum):
 def filtergenerator():
     return None
 
-# define a function that scrubs directories that contain no pcaps
-def cleanup(jobnum):
-    counter = 0
-    for root, dirs, files in os.walk(f"archives/{jobnum}/"):
-        if counter == 0:
-            counter += 1
-            next
-        if not files:
-            os.rmdir(root)
+# define a function that scrubs directories that contain pcaps with no packets (test by size?), or no pcaps
+def cleanup():
     return None
 
 
@@ -87,10 +80,6 @@ def main():
                 cap.load_packets() # this line creates the output_file
                 if len(cap._packets) == 0:
                     os.remove(f"archives/{jobnum}/{sp}/trace_{pcapNoExt}_containing_{sp}.pcap")
-
-    # almost done, call our function to remove directories that do not contain pcaps
-    cleanup(jobnum)
-
 
 # IF you are run via the CMD line, or invoked directly, call main
 # IF you are imported... chill out.
