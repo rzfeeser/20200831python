@@ -11,6 +11,7 @@ Updates to Make:
     Look at scapy.py library for detailed *pcap analysis
     """
 
+import argparse
 import os
 import uuid
 from datetime import datetime
@@ -18,9 +19,9 @@ import pyshark
 #import scapy # v heavy on memory, but good for small pcap analysis. Use tshark to reduce pcaps > use scapy to dig
 
 # Open the file /pcaps/maclist.txt (list of macs to watch for)
-def whatMacsAttack():
+def whatMacsAttack(macfile):
     """looks for the input file pcaps/maclist.txt and returns a dictionary with two lists"""
-    with open("pcaps/maclist.txt") as maclist:
+    with open(macfile) as maclist:
         perps = maclist.read().splitlines() # read the entire file into a single string, then split across "\n"
         maclist.seek(0) # move the cursor back to the start of the file (prevents having to close and reopen)
         shortenedperps = maclist.read().replace(":", "").splitlines() # strip out the : from the mac addresses
@@ -43,7 +44,7 @@ def cleanup(jobnum):
     for root, dirs, files in os.walk(f"archives/{jobnum}/"):
         if counter == 0:
             counter += 1
-            next
+            continue
         if not files:
             os.rmdir(root)
     return None
@@ -58,7 +59,7 @@ def main():
     """
 
     # returns two lists one with colons and one without
-    perps = whatMacsAttack()     # returns a tuple ([mac list], [no colon mac list])
+    perps = whatMacsAttack(args.macfile)     # returns a tuple ([mac list], [no colon mac list])
 
     # change to the real directory of where the script resides
     movehere = os.path.dirname(os.path.realpath(__file__))
@@ -95,4 +96,12 @@ def main():
 # IF you are run via the CMD line, or invoked directly, call main
 # IF you are imported... chill out.
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='''
+            Search for MAC and IP address within all *.pcap files found within local directory pcaps/.
+            Results are outputted to archives/YYYY-MM-DD_HH-MM-SS/[offending IP or MAC]''')
+    
+    parser.add_argument('-m', '--macfile', default='pcaps/maclist.txt', help='File containing the MAC addresses to scan for')
+
+    args = parser.parse_args()
+    
     main()
